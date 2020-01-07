@@ -2,7 +2,6 @@ package kamenev.service;
 
 import kamenev.model.Post;
 import kamenev.dao.PostDAO;
-import kamenev.dao.PostDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

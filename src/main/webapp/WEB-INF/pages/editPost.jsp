@@ -13,10 +13,10 @@
 </head>
 <body>
 <c:if test="${empty post.text}">
-    <c:url value="/add" var="var"/>
+    <c:url value="/posts/add" var="var"/>
 </c:if>
 <c:if test="${!empty post.text}">
-    <c:url value="/edit" var="var"/>
+    <c:url value="/posts/edit" var="var"/>
 </c:if>
 <form action="${var}" method="post">
     <c:if test="${!empty post.text}">

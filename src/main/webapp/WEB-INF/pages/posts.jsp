@@ -30,7 +30,7 @@
 </c:forEach>
 
 <h2>Add</h2>
-<c:url value="/add" var="add" />
+<c:url value="/posts/add" var="add" />
 <a href="${add}">Add new post</a>
 </body>
 </html>

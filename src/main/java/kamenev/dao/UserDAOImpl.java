@@ -1,6 +1,8 @@
 package kamenev.dao;
 
 import kamenev.model.Post;
+import kamenev.model.User;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public class PostDAOImpl implements PostDAO {
-    //private static final AtomicInteger AUTO_ID = new AtomicInteger(0);
+public class UserDAOImpl implements UserDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -22,38 +23,38 @@ public class PostDAOImpl implements PostDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Post> allPosts() {
+    public List<User> allUsers() {
         try {
             Session session = sessionFactory.getCurrentSession();
-            List postList = session.createQuery("from Post").getResultList();
-            return postList;
-        } catch (Exception e) {
+            List usersList = session.createQuery("from User").list();
+            return usersList;
+        } catch (HibernateException e) {
+            System.out.println("RUNTIME EXCEPTION!!!");
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void create(Post post) {
+    public void create(User user) {
         Session session = sessionFactory.getCurrentSession();
-        //post.setId(AUTO_ID.getAndIncrement());
-        session.persist(post);
+        session.persist(user);
     }
 
     @Override
-    public void update(Post post) {
+    public User getById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(post);
+        return session.get(User.class, id);
     }
 
     @Override
-    public void delete(Post post) {
+    public void update(User user) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(post);
+        session.update(user);
     }
 
     @Override
-    public Post getById(int id) {
+    public void delete(User user) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Post.class, id);
+        session.delete(user);
     }
 }

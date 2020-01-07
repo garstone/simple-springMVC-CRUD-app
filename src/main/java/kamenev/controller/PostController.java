@@ -2,15 +2,14 @@ package kamenev.controller;
 
 import kamenev.model.Post;
 import kamenev.service.PostService;
-import kamenev.service.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@RequestMapping(value = "/posts")
 @Controller
 public class PostController {
     private final PostService postService;
@@ -20,7 +19,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @RequestMapping(value={"/posts", "/"}, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView allPosts() {
             List<Post> posts = postService.allPosts();
         ModelAndView modelAndView = new ModelAndView();
@@ -33,7 +32,7 @@ public class PostController {
     public ModelAndView editPage(@PathVariable("id") int id) {
         Post post = postService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("edit");
+        modelAndView.setViewName("editPost");
         modelAndView.addObject("post", post);
         return modelAndView;
     }
@@ -49,7 +48,7 @@ public class PostController {
     @GetMapping(value = "/add")
     public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("edit");
+        modelAndView.setViewName("editPost");
         return modelAndView;
     }
 
