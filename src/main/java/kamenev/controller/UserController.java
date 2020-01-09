@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+import static kamenev.controller.RegistrationController.getModelAndView;
+
 /**
  * Контроллер для странички с отображением всех юзеров (для админа)
  */
@@ -53,15 +55,13 @@ public class UserController {
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editUser");
+        modelAndView.addObject("signup", "true");
         return modelAndView;
     }
 
     @PostMapping(value = "/add")
     public ModelAndView addUser(@ModelAttribute("user") User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        userService.create(user);
-        return modelAndView;
+        return getModelAndView(user, userService);
     }
 
     @GetMapping(value = "/delete/{id}")
