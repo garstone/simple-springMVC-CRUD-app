@@ -27,7 +27,7 @@ public class ProfileController {
     @GetMapping
     public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.getById(0); //TODO Создать SESSIONSERVICE
+        User user = userService.getById(0);
         return modelAndView;
     }
 

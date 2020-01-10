@@ -1,15 +1,16 @@
 package kamenev.dao;
 
 import kamenev.model.Post;
+import kamenev.model.Role;
 import kamenev.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface UserDAO {
-    List<User> allUsers();
-    void create(User user);
-    User getById(int id);
-    void update(User user);
-    void delete(User user);
-    User getByName(String username);
+@Transactional
+@Repository
+public interface UserDAO extends JpaRepository<User, Integer> {
+    User findByName(String username);
 }

@@ -1,13 +1,14 @@
 package kamenev.dao;
 
 import kamenev.model.Post;
+import kamenev.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface PostDAO {
-    List<Post> allPosts();
-    void create(Post post);
-    Post getById(int id);
-    void update(Post post);
-    void delete(Post post);
+@Transactional
+@Repository
+public interface PostDAO extends JpaRepository<Post, Integer> {
 }
