@@ -39,18 +39,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+        registry.addRedirectViewController("/","/WEB-INF/pages/index.jsp");
+        registry.addRedirectViewController("/index","/WEB-INF/pages/index.jsp");
     }
-/*
-
-
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-
-        JpaTransactionManager txManager = new JpaTransactionManager();
-        txManager.setEntityManagerFactory(entityManagerFactory);
-        return txManager;
-    }
-
- */
 }

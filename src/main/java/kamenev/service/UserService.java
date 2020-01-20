@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
         if (userDAO.findByName(user.getUsername()) != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
+        user.setRoles(Collections.singleton(new Role(2, "USER")));
         userDAO.save(user);
         return true;
     }

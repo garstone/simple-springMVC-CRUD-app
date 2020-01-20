@@ -19,8 +19,8 @@ public class RegistrationController {
     @GetMapping
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("signup", "true");
-        modelAndView.setViewName("editUser");
+        modelAndView.setViewName("registration");
+        modelAndView.addObject("user", new User());
         return modelAndView;
     }
 
@@ -32,7 +32,6 @@ public class RegistrationController {
     static ModelAndView getModelAndView(@ModelAttribute("user") User user, UserService userService) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
-        modelAndView.addObject("signup", "true");
         if (!userService.create(user)) {
             modelAndView.addObject("error", "true");
             modelAndView.setViewName("redirect:/users/add");
