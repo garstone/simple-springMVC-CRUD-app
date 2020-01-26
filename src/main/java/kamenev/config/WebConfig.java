@@ -1,5 +1,7 @@
 package kamenev.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +29,6 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = "kamenev.dao")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class WebConfig implements WebMvcConfigurer {
-
     //Определяем где именно искать view в webapp
     @Bean
     ViewResolver viewResolver() {
@@ -41,5 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/","/WEB-INF/pages/index.jsp");
         registry.addRedirectViewController("/index","/WEB-INF/pages/index.jsp");
+        registry.addViewController("/login").setViewName("login");
     }
 }
