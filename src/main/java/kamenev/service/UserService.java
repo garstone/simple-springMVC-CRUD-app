@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
         if (userDAO.findByName(user.getUsername()) != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(2, "USER")));
+        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         userDAO.save(user);

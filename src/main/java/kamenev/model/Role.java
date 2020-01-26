@@ -7,12 +7,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="t_role")
+@Table(name="role")
 public class Role implements GrantedAuthority {
 
     @Id
-    private int id;
-    private String login;
+    private String role;
+    //private int id;
+    //private String login;
     @Transient
     @ManyToMany(mappedBy="roles")
     private Set<User> users;
@@ -20,6 +21,15 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
+    @Override
+    public String getAuthority() {
+        return role;
+    }
+
+    public Role(String role) {
+        this.role = role;
+    }
+/*
     public Role(int id, String login) {
         this.id = id;
         this.login = login;
@@ -45,6 +55,8 @@ public class Role implements GrantedAuthority {
     public void setLogin(String login) {
         this.login = login;
     }
+
+ */
 
     public Set<User> getUsers() {
         return users;

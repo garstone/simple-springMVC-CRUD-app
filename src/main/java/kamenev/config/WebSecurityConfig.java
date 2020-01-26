@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .dataSource(dataSource)
         .passwordEncoder(passwordEncoder())
         .usersByUsernameQuery("select login, password, enabled from users where login=?")
-        .authoritiesByUsernameQuery("select u.login, ur.roles_id from users u inner join users_t_role ur " +
+        .authoritiesByUsernameQuery("select u.login, ur.roles_role from users u inner join users_role ur " +
                 "on u.id = ur.User_id where u.login=?");
     }
 
@@ -40,8 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //доступ только для незарегистрированных пользователей
         .antMatchers("/signup").not().fullyAuthenticated()
-                .antMatchers("/posts/**", "/users/**").hasAuthority("ADMIN")  //только для админов
-        .antMatchers("/users/**").hasAuthority("USER") //hasRole("USER)
+                .antMatchers("/users/**").hasRole("ADMIN")  //только для админов
+        .antMatchers("/posts/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/index", "/").permitAll()
                 .anyRequest().authenticated()  // Все остальные страницы требуют аутентификации
                 .and() //настройка для входа в систему
